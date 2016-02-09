@@ -1,0 +1,31 @@
+<%= form_for(@company) do |f| %>
+  <% if @company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+      <% @company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field form-group">
+  <div class="col-sm-10">
+    <%= f.text_field :company_name , class: 'form-control' , :placeholder=>'Enter the First Name' , required: true%>
+  </div>
+  </div>
+  <br><br><br>
+<div class="field form-group">
+  <div class="col-sm-10">
+     <%= f.collection_select(:shipper_detail_id,  ShipperDetail.all, :id, :fname, :prompt => 'Select Shipper') %>   
+  </div>
+</div>
+<br><br><br>
+  <div class="actions form-group">
+    <div class="col-sm-offset-1 col-sm-5">
+      <%= f.submit  class: "btn btn-success"  %>
+    </div>
+  </div>
+<% end %>

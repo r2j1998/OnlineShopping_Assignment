@@ -1,0 +1,58 @@
+
+
+<%= form_for(@shipper_detail) do |f| %>
+  <% if @shipper_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shipper_detail.errors.count, "error") %> prohibited this shipper_detail from being saved:</h2>
+
+      <ul>
+      <% @shipper_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%#= f.label "First Name"  , class: 'col-sm-1 control-label' %>
+     <div class="col-sm-10">
+    <%= f.text_field :fname  , class: 'form-control' , :placeholder=>'Enter the First Name' , required: true%>
+  </div>
+  </div>
+<br><br><br>
+
+  <div class="field form-group">
+  <div class="col-sm-10">
+    <%#= f.label "Last Name" %>
+    <%= f.text_field :lname ,class: 'form-control' , :placeholder=>'Enter the Last Name' , required: true %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+  <div class="col-sm-10">
+    <%= f.text_field :email ,class: 'form-control' , :placeholder=>'Enter the Email Id' , required: true %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+  <div class="col-sm-10">
+    <%= f.number_field :mobile_no , class: 'form-control' , :placeholder=>'Enter the Mobile Number' , required: true %>
+  </div>
+  </div>
+  <br><br><br>
+
+<h3>Shipper Address</h3>
+  <%= f.fields_for :shipper_addresses do |addr| %>
+    <%= render "shipper_addresses/form" , :f => addr %>
+  <% end %>
+
+  <div class="actions form-group">
+    <div class="col-sm-offset-1 col-sm-5">
+      <%= f.submit  class: "btn btn-success"  %>
+    </div>
+  </div>
+<% end %>
+
+

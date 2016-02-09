@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Companies</h1>
+<ul class="nav nav-tabs" role="tablist" >
+ <li> <%= link_to 'Category', categories_path %></li>
+  <li class="active"><%= link_to 'Company', companies_path %></li>
+  <li><%= link_to 'Shipper', shipper_details_path %></li>
+  </ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th>Shipper details</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.company_name %></td>
+        <td><%= company.shipper_details %></td>
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_company_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>City:</strong>
+  <%= @shipper_address.city %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @shipper_address.district %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @shipper_address.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @shipper_address.country %>
+</p>
+
+<p>
+  <strong>Pincode:</strong>
+  <%= @shipper_address.pincode %>
+</p>
+
+<%= link_to 'Edit', edit_shipper_address_path(@shipper_address) %> |
+<%= link_to 'Back', shipper_addresses_path %>

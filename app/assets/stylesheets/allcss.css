@@ -1,0 +1,68 @@
+h1 {
+    color: white;
+    text-shadow: 2px 2px 4px red;
+}
+.currencyINR
+{
+  background-image: url("http://g-ecx.images-amazon.com/images/G/31/nav2/images/gui/searchSprite._CB323617840_.png");
+     background-repeat: no-repeat;
+}
+
+.currencyINR{
+    
+     background-position: -1px -961px;
+    font-size: 12px;
+    height: 12px;
+    line-height: 12px;
+    margin-bottom: 2px;
+    margin-right: 0;
+    width: 7px;
+
+}
+   
+  
+
+
+.mylogin{
+    width: 500px;
+    height: auto;
+    padding: 50px;
+   
+    box-shadow: 10px 10px 5px 10px grey;
+}
+
+.mytitle {
+    color: #7B68EE;
+     text-shadow: 2px 2px 5px red;
+} 
+
+.navbar-brand
+{
+	font-size: 50px;
+	 color: white;
+    text-shadow: 2px 2px 4px blue;
+}
+
+.my_signup{
+
+	width: 700px;
+    height: auto;
+    padding: 50px;
+   
+    box-shadow: 10px 10px 10px  10px grey;
+
+}
+
+
+
+
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
