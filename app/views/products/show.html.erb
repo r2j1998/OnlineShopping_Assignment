@@ -41,16 +41,13 @@
 
 
 
-<%= link_to new_category_path, class: 'btn btn-warning' do %>
+<%= link_to   product_cart_create_path(@product), class: 'btn btn-warning' do %>
   <i class="glyphicon glyphicon-plus"></i> Add to Cart
 <% end %>
 
-<%= link_to new_category_path, class: 'btn btn-info' do %>
+<%= link_to new_product_order_path(@product), class: 'btn btn-info' do %>
   <i class="glyphicon glyphicon-plus"></i> Buy Now
 <% end %>
-
-
-
 
 <hr class="colorgraph">
 <h3><%= @product.category.category_name %> releated Product</h3>

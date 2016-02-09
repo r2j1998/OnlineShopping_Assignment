@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  
+
+  #resources :orders
   get 'products/searchproducts'
   devise_for :customers
-  resources :products
+  resources :products do
+    resources :orders
+    get 'cart/index'
+    get 'cart/create'
+  end
   resources :companies
   resources :shipper_details
   resources :shipping_addresses

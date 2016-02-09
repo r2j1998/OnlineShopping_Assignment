@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   	belongs_to :category
   	belongs_to :company
+    has_many :orders
 
 	def self.search(search)
   		if search

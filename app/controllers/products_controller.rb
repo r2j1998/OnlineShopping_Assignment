@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    cookies[:cart]=[1,2,2]
     @products = Product.all
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208112209) do
+ActiveRecord::Schema.define(version: 20160209104601) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name", limit: 255
@@ -49,6 +49,22 @@ ActiveRecord::Schema.define(version: 20160208112209) do
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "product_id",          limit: 4
+    t.integer  "customer_id",         limit: 4
+    t.integer  "quantity",            limit: 4
+    t.date     "delivery_date"
+    t.string   "status",              limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.float    "amount",              limit: 24
+    t.integer  "shipping_address_id", limit: 4
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
+  add_index "orders", ["shipping_address_id"], name: "index_orders_on_shipping_address_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "category_id",        limit: 4
@@ -105,6 +121,9 @@ ActiveRecord::Schema.define(version: 20160208112209) do
   add_index "shipping_addresses", ["customer_id"], name: "index_shipping_addresses_on_customer_id", using: :btree
 
   add_foreign_key "companies", "shipper_details"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "shipping_addresses"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
   add_foreign_key "shipping_addresses", "customers"
