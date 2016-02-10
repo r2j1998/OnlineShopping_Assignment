@@ -5,8 +5,11 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  
 </head>
 <body>
+
 <div class="header">
     <%= render 'shared/navigation' %>
 </div>
@@ -17,6 +20,17 @@
 	    <p class="alert"><%= alert %></p>
 	    
 		<%= yield %>
+
+		<script>
+  	
+  			swal({
+				   title: 'Confirm',
+				   text: 'Are you sure to delete this message?',
+				   type: 'warning',
+				   showCancelButton: true,
+				   confirmButtonColor: '#987463'
+			});
+  </script>>
 	</div>
 </div>
 </body>

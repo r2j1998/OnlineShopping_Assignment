@@ -62,12 +62,13 @@
       <h3>Customer Addresses</h3><br>
   <%= f.fields_for :addresses do |addr| %>
         <hr>
+              <!--%#= addr.radio_button :deliver_address ,  "true"  %>  Deliver to this Address<br-->
           <%= render "addresses/form" , :f => addr %>
         </hr>
       <% end %>
         <hr>
           <h3>New Order</h3><br>
-         <%= f.fields_for :orders do |ord| %>
+          <%= f.fields_for :orders do |ord| %>
             <% @order = Order.new  %>
             <% @all_products =Product.all %>
             <% @order_line = @order.item_lines.build %>

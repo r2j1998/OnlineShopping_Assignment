@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210103152) do
+ActiveRecord::Schema.define(version: 20160210115008) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "city",        limit: 255
-    t.string   "district",    limit: 255
-    t.string   "state",       limit: 255
-    t.string   "country",     limit: 255
-    t.string   "pincode",     limit: 255
-    t.integer  "customer_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "city",            limit: 255
+    t.string   "district",        limit: 255
+    t.string   "state",           limit: 255
+    t.string   "country",         limit: 255
+    t.string   "pincode",         limit: 255
+    t.integer  "customer_id",     limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "deliver_address",             default: false
   end
 
   add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree

@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-   # raise params[:products].inspect
+    raise params.inspect
     @customer = Customer.new(customer_params)
     #raise @customer.inspect
     respond_to do |format|

@@ -50,3 +50,4 @@ gem 'bootstrap-sass'#, '~> 3.2.0'
 gem "paperclip"#, "~> 4.3"
 gem "has_permalink"
 gem 'font-awesome-rails'
+gem 'sweet-alert'
