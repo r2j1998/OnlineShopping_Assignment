@@ -1,21 +1,11 @@
 Rails.application.routes.draw do
-  
-
-  #resources :orders
-  get 'products/searchproducts'
-  devise_for :customers
-  resources :products do
-    resources :orders
-    get 'cart/index'
-    get 'cart/create'
-  end
+  resources :orders
+  resources :addresses
+  resources :customers
+  resources :products
   resources :companies
-  resources :shipper_details
-  resources :shipping_addresses
-  resources :shipper_addresses
   resources :categories
   root to: "categories#index"
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

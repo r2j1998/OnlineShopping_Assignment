@@ -1,9 +1,0 @@
-	<%= form_tag   products_searchproducts_path  ,role: "search" , :method => 'get' do %>
-    
-        <div class="form-group">
-        	<div class="col-sm-7">
-        		<%= text_field_tag :search, params[:search] ,placeholder: "Search Product" ,required: true ,class: 'form-control' %>
-           	</div>
-        </div>                    
-        	<%= submit_tag "Search" , class: "btn btn-danger" %>
-    <% end %>

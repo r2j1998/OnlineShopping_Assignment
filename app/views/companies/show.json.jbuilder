@@ -1,1 +1,1 @@
-json.extract! @company, :id, :company_name, :shipper_details_id, :created_at, :updated_at
+json.extract! @company, :id, :company_name, :created_at, :updated_at

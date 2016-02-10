@@ -1,26 +1,34 @@
 <p id="notice"><%= notice %></p>
-  <center>
-  <%= image_tag @order.product.image %>
- <div class="jumbotron">
- <h3><%= @order.customer.fname %> <%= @order.customer.lname %></h3>
-  <br>
-  <strong>Customer Address:</strong>
-  <br>
-    City: <%= @order.shipping_address.city %><br>
-    District: <%= @order.shipping_address.district %><br>
-     State: <%= @order.shipping_address.state %><br>
-    Country: <%= @order.shipping_address.country %><br>
-    Postal Code: <%= @order.shipping_address.pincode %><br>
 
-  <strong>Quantity:</strong>
-      <%= @order.quantity %><br>
+<p>
+  <strong>Order no:</strong>
+  <%= @order.order_no %>
+</p>
 
+<p>
+  <strong>Tracking no:</strong>
+  <%= @order.tracking_no %>
+</p>
+
+<p>
   <strong>Delivery date:</strong>
-    <%= @order.delivery_date %><br>
+  <%= @order.delivery_date %>
+</p>
 
-     <strong>Total Amount:</strong>
-    <%= @order.amount %><br>
-</div>
-</center>
-<%#= link_to 'Edit', edit_order_path(@order) %> 
-<%#= link_to 'Back', orders_path %>
+<p>
+  <strong>Order value:</strong>
+  <%= @order.order_value %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @order.amount %>
+</p>
+
+<p>
+  <strong>Delivery type:</strong>
+  <%= @order.delivery_type %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

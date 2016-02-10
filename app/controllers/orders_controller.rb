@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-   before_filter :authenticate_customer!, :except => [ :index,  :show]
 
   # GET /orders
   # GET /orders.json
@@ -15,10 +14,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    #
-    @product = Product.find(params[:product_id])
     @order = Order.new
-    #@customer= cu
+    @all_products =Product.all
+    @order_line = @order.item_lines.build    
   end
 
   # GET /orders/1/edit
@@ -28,14 +26,21 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    #raise params.inspect
-    
+   # raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
       if @order.save
-        @product=Product.find(params[:product_id])
-        format.html { redirect_to product_order_path(@product,  @order), notice: 'Order was successfully created.' }
+          product_hash = params.require(:products)
+          product_hash["id"].each do |product|
+
+              if product.to_s.empty?
+              else
+                 @item_line = ItemLine.new(:order_id => @order.id , :product_id => product.to_i )
+                 @item_line.save
+              end
+          end
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -76,9 +81,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-        #raise current_customer.id.inspect
-      params["order"].merge!(customer_id: current_customer.id)
-      #raise params.inspect
-      params.require(:order).permit(:product_id, :customer_id, :quantity, :delivery_date, :status ,:amount, :shipping_address_id)
+      params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type)
     end
 end

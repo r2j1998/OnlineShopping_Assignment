@@ -11,18 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
-
-
- $(document).ready(function () {
-                
-    $('#example1').datepicker({
-    format: "dd/mm/yyyy"
-   	});              
-});
-
- 
- 

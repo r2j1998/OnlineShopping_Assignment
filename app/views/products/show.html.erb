@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
+ <div class="jumbotron">
 
+ <p>
+    <%= image_tag @product.image(:medium) %>
+    </p>
 <p>
- <h2><%= @product.category.category_name %></h2>
+  <strong>Category:</strong>
+  <%= @product.category.category_name %>
 </p>
-
-<p>
-  <%= image_tag @product.image %>
-</p>
-
 
 <p>
   <strong>Company:</strong>
@@ -21,16 +21,12 @@
 
 <p>
   <strong>Description:</strong>
-  <ul>
-      <% @product.description.split(',').each do |separate_description| %>
-        <li> <%= separate_description %></li><br>
-      <% end %>
-  </ul>
+  <%= @product.description %>
 </p>
 
 <p>
   <strong>Price:</strong>
-   Rs. <%= @product.price %>
+  <%= @product.price %>
 </p>
 
 <p>
@@ -38,32 +34,34 @@
   <%= @product.quantity %>
 </p>
 
+<p>
+  <strong>Sku:</strong>
+  <%= @product.sku %>
+</p>
+
+<p>
+  <strong>Lehgth:</strong>
+  <%= @product.lehgth %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @product.width %>
+</p>
+
+<p>
+  <strong>Hieght:</strong>
+  <%= @product.hieght %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @product.weight %>
+</p>
 
 
+<%= link_to  products_path , :style=>'color:#FFFFFF;', class: "btn btn-success" do%>
+<i class="glyphicon glyphicon-chevron-left"></i>Back
+        <%end%>
 
-<%= link_to   product_cart_create_path(@product), class: 'btn btn-warning' do %>
-  <i class="glyphicon glyphicon-plus"></i> Add to Cart
-<% end %>
-
-<%= link_to new_product_order_path(@product), class: 'btn btn-info' do %>
-  <i class="glyphicon glyphicon-plus"></i> Buy Now
-<% end %>
-
-<hr class="colorgraph">
-<h3><%= @product.category.category_name %> releated Product</h3>
-<% @products.each do |product| %>
-
-    <% if product.id == @product.id %>
-        <%= image_tag(product.image(:medium)) %>
-    <% else  %>
-
-    <%= link_to "#{image_tag(product.image(:medium))}".html_safe, product %>
-      <% end %>
-       
-    <% end %>
-</hr>
-
-
-
-<%#= link_to 'Edit', edit_product_path(@product) %> 
-<%#= link_to 'Back', products_path %>
+</div>

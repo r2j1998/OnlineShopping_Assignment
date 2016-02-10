@@ -1,0 +1,72 @@
+
+  <div class="field form-group">
+    <div class="col-sm-10"> 
+        <%#= f.collection_select(:customer_id ,  Customer.all , :id ,   :fname,  :prompt => 'Select Customer') %>  
+    </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+
+    <%= fields_for(@order_line) do |ab| %>
+
+    <%= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
+    <div class="col-sm-6">
+      <%= collection_select(:products, :id , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
+      </div> 
+      <%= link_to "select" , nil , onclick: "" ,  class: "btn btn-success" %>
+    <% end %>   
+  </div>
+  <br><br><br><br><br><br>
+
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.number_field :order_no ,class: 'form-control' , :placeholder=>'Enter the Order Number' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
+
+ <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.number_field :tracking_no ,class: 'form-control' , :placeholder=>'Enter the Tracking number' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
+
+  <div class="field">
+    
+    <%= f.hidden_field :delivery_date,  value: Time.now + 7.days %>
+  </div>
+
+
+
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.text_field :order_value ,class: 'form-control' , :placeholder=>'Enter the Order Value' , required: true %>
+     </div>
+      </div>
+      <br><br><br>
+
+
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.text_field :amount ,class: 'form-control' , :placeholder=>'Enter the Amount' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
+
+
+
+    <div class="field form-group">
+        <%=  f.label :delivery_type  , class: 'col-sm-3 control-label'%><br><br>
+        <div class="col-sm-6">
+          <%= f.radio_button :delivery_type, "Is Express Delivery" ,required: true %>  Is Express Delivery<br>
+          <%= f.radio_button :delivery_type, "Is customer Pickup" ,required: true %>  Is customer Pickup
+      </div>
+    </div>
+    <br><br>
+
+ 
+
+   
+

@@ -1,4 +1,4 @@
 class Company < ActiveRecord::Base
-  belongs_to :shipper_details
-  has_many :products
+	has_many :products
+	validates_presence_of :company_name
 end

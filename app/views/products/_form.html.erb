@@ -18,8 +18,7 @@
   </div>
 </div>
 <br><br><br>
-
- <div class="field form-group">
+  <div class="field form-group">
   <div class="col-sm-10">
      <%= f.collection_select(:company_id,  Company.all, :id ,  :company_name, :prompt => 'Select Company') %>   
   </div>
@@ -28,7 +27,7 @@
 
   
   <div class="field form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
     <%= f.text_field :product_name  , class: 'form-control' , :placeholder=>'Enter the product Name' , required: true %>
    </div>
 </div>
@@ -36,7 +35,7 @@
 
 
   <div class="field form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
    
     <%= f.text_area :description , class: 'form-control' , :placeholder=>'Enter the product description' , required: true %>
      </div>
@@ -45,23 +44,53 @@
 
 
  <div class="field form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
     <%= f.text_field :price ,  class: 'form-control' , :placeholder=>'Enter the product Price' , required: true%>
    </div>
 </div>
 <br><br><br>
 
   <div class="field form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
     <%= f.number_field :quantity , class: 'form-control' , :placeholder=>'Enter the product quantity' , required: true%>
   </div>
 </div>
 <br><br><br>
 
   <div class="field form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
     <%= f.text_field :sku , class: 'form-control' , :placeholder=>'Enter the product sku' , required: true%>
  </div>
+</div>
+<br><br><br>
+  
+
+
+   <div class="field form-group">
+  <div class="col-sm-8">
+    <%= f.number_field :lehgth ,class: 'form-control' , :placeholder=>'Enter the product lehgth' , required: true%>
+   </div>
+</div>
+<br><br><br>
+
+    <div class="field form-group">
+      <div class="col-sm-8">
+        <%= f.number_field :width ,class: 'form-control' , :placeholder=>'Enter the product width' , required: true%>
+      </div>
+    </div>
+<br><br><br>
+
+    <div class="field form-group">
+  <div class="col-sm-8">
+    <%= f.number_field :hieght ,class: 'form-control' , :placeholder=>'Enter the product hieght' , required: true%>
+   </div>
+</div>
+<br><br><br>
+
+    <div class="field form-group">
+  <div class="col-sm-8">
+    <%= f.number_field :weight ,class: 'form-control' , :placeholder=>'Enter the product weight' , required: true%>
+  </div>
 </div>
 <br><br><br>
 
@@ -72,7 +101,7 @@
 </div>
 <br><br><br>
 
-   <div class="actions form-group">
+  <div class="actions form-group">
     <div class="col-sm-offset-1 col-sm-5">
       <%= f.submit  class: "btn btn-success"  %>
     </div>

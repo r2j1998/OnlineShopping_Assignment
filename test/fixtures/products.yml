@@ -8,6 +8,10 @@ one:
   price: 1.5
   quantity: 1
   sku: MyString
+  lehgth: 1
+  width: 1
+  hieght: 1
+  weight: 1
 
 two:
   category_id: 
@@ -17,3 +21,7 @@ two:
   price: 1.5
   quantity: 1
   sku: MyString
+  lehgth: 1
+  width: 1
+  hieght: 1
+  weight: 1

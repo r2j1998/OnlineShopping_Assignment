@@ -1,99 +1,87 @@
-<html>
-<head>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <!--script src="//code.jquery.com/jquery-1.10.2.js"></script-->
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script type="text/javascript">
-  $(function() {
-    $( "#mydatepicker" ).datepicker();
-  });
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-   
-  function  doMath() { 
-       var nValue; var amount;
-       var price=100;
-       nValue = document.getElementById("quantity").value;
-       price = document.getElementById("price").value;
-       //price = 100;
-       amount=(nValue*price);
-       document.getElementById("amount").value=amount ;
-    }
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <div class="col-sm-10"> 
+        <%= f.collection_select(:customer_id ,  Customer.all , :id ,   :fname,  :prompt => 'Select Customer') %>  
+    </div>
+  </div>
+  <br><br><br>
 
-  </script>
+  <div class="field form-group">
 
+    <%= fields_for(@order_line) do |ab| %>
 
-  </head>
-  <body>
+    <%= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
+    <div class="col-sm-6">
+      <%= collection_select(:products, :id , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
+      </div> 
+      <%#= link_to "select" , nil , onclick: "" ,  class: "btn btn-success" %>
+    <% end %>   
+  </div>
+  <br><br><br><br><br><br>
 
-      <%= image_tag @product.image(:medium) %>
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.number_field :order_no ,class: 'form-control' , :placeholder=>'Enter the Order Number' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
 
-      <div class="panel panel-primary">
-      <div class="panel-heading"><h1>New Order</h1></div>
-      <div class="panel-body">
+ <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.number_field :tracking_no ,class: 'form-control' , :placeholder=>'Enter the Tracking number' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
 
-          <%= form_for [@product , @order] , :name => "addamount" , :id =>"addamount"  do |f| %>
-  
-
-              <%= f.hidden_field :product_id , value: @product.id %>
-              <%= f.hidden_field :delivery_date , value: Time.now + 10.days %>
-               <%= f.hidden_field :status , value: "pending" %>
-
-              <div class="field form-group">
-                <div class="col-sm-10">
-                  <b>Available Items: </b>  <%= @product.quantity %>
-                </div>
-              </div>
-              <br><br><br>
-
-              <div class="field form-group">
-              <div class="col-sm-3">
-                <%= f.label :quantity ,class: 'col-sm-1 control-label'%>
-                    <%= f.number_field :quantity  , value: '1' , class: 'form-control' , id: "quantity" , onkeyup: "doMath()" , :placeholder=>'Enter the product Name' , required: true %>
-                  </div>
-              </div>
-              <br><br><br>
-
-            <div class="field form-group">
-              <div class="col-sm-3">
-               Per Items Price: Rs.<%= number_field_tag "price" , nil, value: @product.price ,class: 'form-control',name: "price" , id: "price" , :disabled => true %>
-              </div>
-            </div>
-            <br><br><br>
-
-            <div class="field form-group">
-              <div class="col-sm-3">
-                Total Amount: Rs. <%= f.number_field "amount" , value: @product.price ,class: 'form-control' , id: "amount" ,:readonly => true %>
-              </div>
-            </div>
-            <br><br><br>
-
-            <hr class="colorgraph">
-                 <% current_customer.shipping_addresses.each do |address| %>
-                    <div class="jumbotron">
-                        <div class="field form-group">
-                          <div class="col-sm-8">
-                            <%= f.radio_button :shipping_address_id , address.id  %> Deliver to this Address
-                          </div>
-                        </div>
-                        <br><br>
-                      City:  <%= address.city %><br>
-                      District: <%= address.district %><br>
-                      State: <%= address.state %><br>
-                      Postal Code: <%= address.pincode %><br>
-                      Country: <%= address.country %><br>
-                    </div>
-                 <% end %> 
-            </hr>
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-          <% end %>
+  <div class="field">
+    
+    <%= f.hidden_field :delivery_date,  value: Time.now + 7.days %>
+  </div>
 
 
 
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.text_field :order_value ,class: 'form-control' , :placeholder=>'Enter the Order Value' , required: true %>
+     </div>
+      </div>
+      <br><br><br>
+
+
+  <div class="field form-group">
+        <div class="col-sm-6">
+    <%= f.text_field :amount ,class: 'form-control' , :placeholder=>'Enter the Amount' , required: true%>
+     </div>
+      </div>
+      <br><br><br>
+
+
+
+    <div class="field form-group">
+        <%=  f.label :delivery_type  , class: 'col-sm-3 control-label'%><br><br>
+        <div class="col-sm-6">
+          <%= f.radio_button :delivery_type, "Is Express Delivery" ,required: true %>  Is Express Delivery<br>
+          <%= f.radio_button :delivery_type, "Is customer Pickup" ,required: true %>  Is customer Pickup
       </div>
     </div>
+    <br><br>
 
+ 
 
-</body>
-</html>
+   <div class="actions form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+          <%= f.submit "Create Order" , class: "btn btn-primary btn-block btn-lg" %>
+        </div>
+      </div>
+<% end %>

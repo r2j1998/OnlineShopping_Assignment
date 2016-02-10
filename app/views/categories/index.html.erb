@@ -5,7 +5,10 @@
 <ul class="nav nav-tabs" role="tablist" >
  <li class="active"> <%= link_to 'Category', categories_path %></li>
   <li><%= link_to 'Company', companies_path %></li>
-  <li><%= link_to 'Shipper', shipper_details_path %></li>
+   <li><%= link_to 'Products', products_path %></li>
+    <li><%= link_to 'Customers', customers_path %></li>
+   <li><%= link_to 'Orders', orders_path %></li>
+    
   </ul>
 
 <table class="table">
@@ -20,9 +23,19 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.category_name %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to  category , class: "btn btn-success" do %>
+             <i class="glyphicon glyphicon-check"></i>Show
+             <%end %>
+        </td>
+        <td><%= link_to  edit_category_path(category), class: "btn btn-warning" do %>
+            <i class="glyphicon glyphicon-pencil"></i>Edit
+             <%end %>
+        </td>
+        <td><%= link_to  category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" do %>
+           <i class="glyphicon glyphicon-trash"></i>Destroy
+        <%end%>
+
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +43,8 @@
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to  new_category_path , :style=>'color:#FFFFFF;',class: "btn btn-primary" do %>
+<i class="glyphicon glyphicon-plus"></i>New Category
+        <%end%>
+
+

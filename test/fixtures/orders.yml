@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product_id: 
-  customer_id: 
-  quantity: 1
-  delivery_date: 2016-02-09
-  status: MyString
+  order_no: 1
+  tracking_no: 1
+  delivery_date: 2016-02-10
+  order_value: MyString
+  amount: MyString
+  delivery_type: MyString
 
 two:
-  product_id: 
-  customer_id: 
-  quantity: 1
-  delivery_date: 2016-02-09
-  status: MyString
+  order_no: 1
+  tracking_no: 1
+  delivery_date: 2016-02-10
+  order_value: MyString
+  amount: MyString
+  delivery_type: MyString

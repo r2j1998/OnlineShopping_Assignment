@@ -1,2 +1,0 @@
-module ShipperAddressesHelper
-end

@@ -1,23 +1,15 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_customer!, :except => [ :index, :show ,:searchproducts ]
 
   # GET /products
   # GET /products.json
   def index
-    cookies[:cart]=[1,2,2]
     @products = Product.all
   end
 
-  def searchproducts
-    #raise params.inspect
-      @products = Product.search(params[:search])
-  end
   # GET /products/1
   # GET /products/1.json
   def show
-      #raise @product.inspect
-      @products = Product.where(:category_id => @product.category_id )
   end
 
   # GET /products/new
@@ -77,7 +69,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      #raise params.inspect
-      params.require(:product).permit(:category_id, :company_id, :product_name, :description, :price, :quantity, :sku , :image)
+      params.require(:product).permit(:category_id, :company_id, :product_name, :description, :price, :quantity, :sku, :lehgth, :width, :hieght, :weight ,:image)
     end
 end
