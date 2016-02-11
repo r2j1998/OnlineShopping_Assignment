@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
-
+<div class="jumbotron">
 <p>
   <strong>Category name:</strong>
   <%= @category.category_name %>
 </p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<br><br><br>
+	<%= link_to root_path , :style=>'color:#FFFFFF;', class: "btn btn-success" do%>
+	<i class="glyphicon glyphicon-home"></i>Home
+	<% end %>
+</div>

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 <div class="jumbotron">
 <p>
   <strong>Email:</strong>
@@ -24,6 +24,10 @@
   <strong>Birth date:</strong>
   <%= @customer.birth_date %>
 </p>
+<br><br><br>
+  <%= link_to root_path , :style=>'color:#FFFFFF;', class: "btn btn-success" do%>
+  <i class="glyphicon glyphicon-home"></i>Home
+  <% end %>
 </div>
-<%#= link_to 'Edit', edit_customer_path(@customer) %> |
+<%#= link_to 'Edit', edit_customer_path(@customer) %> 
 <%#= link_to 'Back', customers_path %>

@@ -16,21 +16,16 @@
 <br><br>
 <div class="container">
 	<div class ="center">
-	 	<p class="notice"><%= notice %></p>
-	    <p class="alert"><%= alert %></p>
+
+	<% flash.each do |name, msg| %>
+		<script>
+  			swal("Good job!", "<%= msg %>", "success")
+  		</script>
+	<% end %>
 	    
 		<%= yield %>
 
-		<script>
-  	
-  			swal({
-				   title: 'Confirm',
-				   text: 'Are you sure to delete this message?',
-				   type: 'warning',
-				   showCancelButton: true,
-				   confirmButtonColor: '#987463'
-			});
-  </script>>
+		
 	</div>
 </div>
 </body>

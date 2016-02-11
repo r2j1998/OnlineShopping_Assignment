@@ -59,9 +59,15 @@
         </div>
       </div>
       <br><br><br>
-      <h3>Customer Addresses</h3><br>
+      
   <%= f.fields_for :addresses do |addr| %>
         <hr>
+        <% if addr.index == 0 %>
+           <h3>Customer Addresses 1</h3><br>
+        <% else %>
+         <h3>Customer Addresses 2</h3><br>
+        <% end %>
+            <%= radio_button_tag "deliver_address" ,  "true"  %>  Deliver to this Address<br>
               <!--%#= addr.radio_button :deliver_address ,  "true"  %>  Deliver to this Address<br-->
           <%= render "addresses/form" , :f => addr %>
         </hr>

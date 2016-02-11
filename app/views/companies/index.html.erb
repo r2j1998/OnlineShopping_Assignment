@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Listing Companies</h1>
 <ul class="nav nav-tabs" role="tablist" >
@@ -22,15 +22,15 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.company_name %></td>
-        <td><%= link_to  company , class: "btn btn-success" do%>
+        <td><%= link_to  company , class: "btn btn-success", :style=>'color:#FFFFFF;' do%>
           <i class="glyphicon glyphicon-check"></i>Show
              <%end %>
         </td>
-        <td><%= link_to  edit_company_path(company) , class: "btn btn-warning" do%>
+        <td><%= link_to  edit_company_path(company) , class: "btn btn-warning", :style=>'color:#FFFFFF;' do%>
              <i class="glyphicon glyphicon-pencil"></i>Edit
              <%end %>
         </td>
-        <td><%= link_to  company, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do%>
+        <td><%= link_to  company, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger", :style=>'color:#FFFFFF;' do%>
            <i class="glyphicon glyphicon-trash"></i>Destroy
             <%end %>
         </td>

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Listing Products</h1>
 <ul class="nav nav-tabs" role="tablist" >
@@ -43,15 +43,15 @@
         <td><%= product.width %></td>
         <td><%= product.hieght %></td>
         <td><%= product.weight %></td>
-        <td><%= link_to  product ,class: "btn btn-success" do%>
+        <td><%= link_to  product ,class: "btn btn-success" , :style=>'color:#FFFFFF;' do%>
                <i class="glyphicon glyphicon-check"></i>Show
             <%end%>
         </td>
-        <td><%= link_to edit_product_path(product) ,class: "btn btn-warning" do %>
+        <td><%= link_to edit_product_path(product) ,class: "btn btn-warning" , :style=>'color:#FFFFFF;' do %>
               <i class="glyphicon glyphicon-check"></i>Edit
             <%end%>
         </td>
-        <td><%= link_to  product, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger" do %>
+        <td><%= link_to  product, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger" , :style=>'color:#FFFFFF;' do %>
               <i class="glyphicon glyphicon-check"></i>Destroy
             <%end%>
         </td>

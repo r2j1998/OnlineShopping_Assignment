@@ -1,4 +1,4 @@
-order_customer_id
+
 
 <html>
   <head>
@@ -8,11 +8,61 @@ order_customer_id
         $("#products_id").click(function () { 
           var str ="";
            $('#products_id option:selected').each(function(){
-              str+=$(this).text() + "  <input type='text'> <br> <br>";
+              str+=$(this).text() + " <br><br>Price Per Item : <input type='text' id=price_"+$(this).val()+" class='form-control' readonly> <br> <br> Qantity: <input type='text' id=quantity_"+$(this).val()+" class='col-sm-3 form-control quantity_key_event' required placeholder='Enter the Product Quantity'> <br><br>";
            }); 
-          document.getElementById("myHeader").innerHTML= str
+          document.getElementById("myHeader").innerHTML= str;
+
+            $('#products_id option:selected').each(function(){
+
+                val1=document.getElementById("h_"+$(this).val()).value;
+                document.getElementById("price_"+$(this).val()).value=val1;
+            });
+            document.getElementById("order_amount").value=0 ;
+            document.getElementById("order_order_value").value=0 ;
+            
         });
+         $('.quantity_key_event').live('keyup' ,function(event)
+         {  
+                 if(event.keyCode != 8)
+                  {
+                    doMath($(this).val() , this.id , 1);  
+                  }  
+          });
+
+            $('.quantity_key_event').live('keydown' ,function(event)
+            {  
+                if(event.keyCode == 8)
+                  {
+                    doMath($(this).val() , this.id , 2);
+                  }               
+            });
       });
+        function  doMath(product_quantity ,quantity_id ,no) { 
+          
+          var price = quantity_id.split('quantity_');
+          var price_id = "price_"+price[1];
+          var product_price; var amount=0;
+          var total_quantity = document.getElementById("order_order_value").value
+          amount = document.getElementById("order_amount").value;   
+         product_price = document.getElementById(price_id).value;  
+
+            if(no==1)
+            {
+                amount=(parseInt(amount)+(parseInt(product_quantity)*parseInt(product_price)));
+                total_quantity= (parseInt(total_quantity)+ parseInt(product_quantity))
+            }
+            else
+            {
+                alert(product_quantity);
+                amount=(parseInt(amount)-(parseInt(product_quantity)*parseInt(product_price)));
+                document.getElementById(quantity_id).value=0 ;
+                total_quantity= (parseInt(total_quantity)-parseInt(product_quantity))
+            }        
+                 
+         document.getElementById("order_amount").value=amount ;
+         document.getElementById("order_order_value").value=total_quantity;
+      }
+        
     </script>
     <title></title>
   </head>
@@ -35,8 +85,10 @@ order_customer_id
         </div>
       </div>
       <br><br><br>
-
-     
+                
+                <% @all_products.each do |product| %>
+                  <%= hidden_field_tag "h_#{product.id}" , product.price %>
+                <% end %>
 
       <div class="field form-group">
 
@@ -76,7 +128,7 @@ order_customer_id
 
       <div class="field form-group">
             <div class="col-sm-6">
-        <%= f.text_field :order_value ,class: 'form-control' , :placeholder=>'Enter the Order Value' , required: true %>
+        <%= f.text_field :order_value ,class: 'form-control' , value: '0' ,  :placeholder=>'Enter the Order Value' , required: true , readonly: true%>
          </div>
           </div>
           <br><br><br>
@@ -84,7 +136,7 @@ order_customer_id
 
       <div class="field form-group">
             <div class="col-sm-6">
-        <%= f.text_field :amount ,class: 'form-control' , :placeholder=>'Enter the Amount' , required: true%>
+        <%= f.text_field :amount ,class: 'form-control' ,  value: '0' , :placeholder=>'Enter the Amount' , readonly: true , required: true%>
          </div>
           </div>
           <br><br><br>

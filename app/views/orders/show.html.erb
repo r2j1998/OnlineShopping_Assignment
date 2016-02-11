@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<div class="jumbotron">
 <p>
   <strong>Order no:</strong>
   <%= @order.order_no %>
@@ -30,5 +29,9 @@
   <%= @order.delivery_type %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<br><br><br>
+  <%= link_to root_path , :style=>'color:#FFFFFF;', class: "btn btn-success" do%>
+    <i class="glyphicon glyphicon-home"></i>Home
+  <% end %>
+
+</div>
