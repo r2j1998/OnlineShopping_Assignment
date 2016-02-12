@@ -16,20 +16,20 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @all_products =Product.all
-    @order_line = @order.item_lines.build    
+    @item_lines = @order.item_lines.build    
   end
 
   # GET /orders/1/edit
   def edit
      @all_products =Product.all
-      @order_line = @order.item_lines  
+      @item_lines = @order.item_lines  
 
   end
 
   # POST /orders
   # POST /orders.json
   def create
-   # raise params.inspect
+    #raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|

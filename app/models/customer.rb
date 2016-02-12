@@ -8,5 +8,6 @@ class Customer < ActiveRecord::Base
 	has_many :addresses , :dependent => :destroy
 	has_many :products
 	has_many :orders
-	accepts_nested_attributes_for :addresses ,:orders
+	accepts_nested_attributes_for :addresses ,:orders , :reject_if => :all_blank,
+           												:allow_destroy => true
 end

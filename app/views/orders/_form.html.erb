@@ -8,7 +8,7 @@
         $("#products_id").click(function () { 
           var str ="";
            $('#products_id option:selected').each(function(){
-              str+=$(this).text() + " <br><br>Price Per Item : <input type='text' id=price_"+$(this).val()+" class='form-control' readonly> <br> <br> Qantity: <input type='text' id=quantity_"+$(this).val()+" class='col-sm-3 form-control quantity_key_event' required placeholder='Enter the Product Quantity'> <br><br>";
+              str+="<br><br>"+$(this).text() + " <br>Price Per Item : <input type='text' id=price_"+$(this).val()+" class='form-control' readonly> <br> <br> Qantity: <input type='text' id=quantity_"+$(this).val()+" class='col-sm-3 form-control quantity_key_event' required placeholder='Enter the Product Quantity'><br> ";
            }); 
           document.getElementById("myHeader").innerHTML= str;
 
@@ -92,7 +92,7 @@
 
       <div class="field form-group">
 
-        <%= fields_for(@order_line) do |ab| %>
+        <%= fields_for(@item_lines) do |ab| %>
 
         <%= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
         <div class="col-sm-6">
