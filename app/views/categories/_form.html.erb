@@ -6,6 +6,7 @@
       <ul>
       <% @category.errors.full_messages.each do |message| %>
         <li><%= message %></li>
+            <%# flash[:success]=message %>
       <% end %>
       </ul>
     </div>

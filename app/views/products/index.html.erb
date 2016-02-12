@@ -9,7 +9,7 @@
    <li><%= link_to 'Orders', orders_path %></li>
   
   </ul>
-<table class="table">
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>Images</th>
@@ -32,8 +32,8 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= image_tag product.image(:thumb) rescue '' %></td> 
-        <td><%= product.category.category_name %></td>
-        <td><%= product.company.company_name %></td>
+        <td><%= product.category.category_name  rescue ''%></td>
+        <td><%= product.company.company_name rescue '' %></td>
         <td><%= product.product_name %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>

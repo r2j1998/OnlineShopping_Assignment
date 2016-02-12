@@ -6,8 +6,9 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script>
   $(function() {
-    $( "#mydatepicker" ).datepicker();
+    $("#mydatepicker").datepicker();
   });
+
   </script>
 
 
@@ -67,7 +68,8 @@
         <% else %>
          <h3>Customer Addresses 2</h3><br>
         <% end %>
-            <%= radio_button_tag "deliver_address" ,  "true"  %>  Deliver to this Address<br>
+        <%#= f.radio_tag(:deliver_address , "true")%>
+           
               <!--%#= addr.radio_button :deliver_address ,  "true"  %>  Deliver to this Address<br-->
           <%= render "addresses/form" , :f => addr %>
         </hr>

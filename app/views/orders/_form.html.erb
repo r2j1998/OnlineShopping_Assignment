@@ -157,7 +157,14 @@
             <div class="col-sm-offset-3 col-sm-3">
               <%= f.submit "Create Order" , class: "btn btn-primary btn-block btn-lg" %>
             </div>
-          </div>
+          </div> 
+          <div class="actions form-group">
+            <div class="col-sm-offset-1 col-lg-2 col-lg-4">
+          <%= link_to root_path , :style=>'color:#FFFFFF;', class: "btn btn-danger" do%>
+              <i class="glyphicon glyphicon-remove-sign"></i>Cancel
+          <% end %>
+           </div>
+          </div> 
     <% end %>
   </body>
 </html>

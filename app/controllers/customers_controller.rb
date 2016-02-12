@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    raise params.inspect
+    #raise params.inspect
     @customer = Customer.new(customer_params)
     #raise @customer.inspect
     respond_to do |format|
@@ -74,7 +74,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country], orders_attributes: [:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type , products: [:product_id]])
+      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country,:deliver_address], orders_attributes: [:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type , products: [:product_id]])
     end
     def save_item_lines(order_id , product_hash)
 

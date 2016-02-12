@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    raise params.inspect
+   # raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
