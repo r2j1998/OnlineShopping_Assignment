@@ -51,3 +51,4 @@ gem "paperclip"#, "~> 4.3"
 gem "has_permalink"
 gem 'sweet-alert'
 gem 'awesome_print'
+gem "cocoon"

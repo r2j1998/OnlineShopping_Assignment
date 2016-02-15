@@ -16,7 +16,8 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     2.times{@customer.addresses.build}
-      @customer.orders.build
+    #@customer.addresses.build
+      #@customer.orders.build
   end
 
   # GET /customers/1/edit
@@ -32,7 +33,7 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if @customer.save
 
-            save_item_lines(Order.last.id,params.require(:products))    
+            #save_item_lines(Order.last.id,params.require(:products))    
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
@@ -74,7 +75,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country,:deliver_address], orders_attributes: [:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type , products: [:product_id]])
+      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country,:deliver_address])
     end
     def save_item_lines(order_id , product_hash)
 
