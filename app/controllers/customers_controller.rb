@@ -15,7 +15,7 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
-    2.times{@customer.addresses.build}
+    3.times{@customer.addresses.build}
     #@customer.addresses.build
       #@customer.orders.build
   end
@@ -75,17 +75,17 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country,:deliver_address])
+      params.require(:customer).permit(:email, :fname, :lname, :mobile_no, :birth_date , addresses_attributes: [:city , :district , :state  , :pincode  , :country])
     end
-    def save_item_lines(order_id , product_hash)
+  #   def save_item_lines(order_id , product_hash)
 
-    product_hash["id"].each do |product|
+  #   product_hash["id"].each do |product|
 
-              if product.to_s.empty?
-              else
-                 @item_line = ItemLine.new(:order_id => order_id, :product_id => product.to_i )
-                 @item_line.save
-              end
-    end
-  end
+  #             if product.to_s.empty?
+  #             else
+  #                @item_line = ItemLine.new(:order_id => order_id, :product_id => product.to_i )
+  #                @item_line.save
+  #             end
+  #   end
+  # end
 end

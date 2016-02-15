@@ -10,6 +10,13 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    #raise params.inspect
+  end
+  def show_addresses
+    ap params.inspect
+      @customer = Customer.find(params[:customer_id])
+      @addresses = @customer.addresses   
+      respond_to :js 
   end
 
   # GET /orders/new
@@ -29,12 +36,12 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    #raise params.inspect
+    raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
       if @order.save
-          product_hash = params.require(:products)
+          product_hash = params.require(:item_lines)
           product_hash["id"].each do |product|
 
               if product.to_s.empty?
@@ -79,11 +86,14 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
+      #raise params.inspect
       @order = Order.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type)
+      params['order'].merge!(:address_id => params['delivery_address'])
+      #raise params.inspect
+      params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type ,  :address_id)
     end
 end

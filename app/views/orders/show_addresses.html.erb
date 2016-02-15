@@ -1,0 +1,19 @@
+
+<% if @addresses.empty? %>
+<h3>Address not available</h3>
+	
+
+<% else %>
+
+		<% @addresses.each do |address| %>	
+		<div class='jumbotron'>	
+		<%= radio_button_tag "delivery_address" , address.id , checked: false, id: 'delivery_address'  , required: true %>  Select Shipping Address <br>
+		  <strong>City: </strong><%= address.city %><br>
+		  <strong>District: </strong><%= address.district %><br>
+		  <strong>State: </strong><%= address.state %><br>
+		  <strong>Country: </strong><%= address.country %><br>
+		  <strong>Pincode: </strong><%= address.pincode %><br>
+		</div>
+	<% end %>
+		
+<% end %>

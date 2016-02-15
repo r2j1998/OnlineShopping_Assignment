@@ -18,6 +18,7 @@
 //= require_tree .
 
 
+
 function htmlbodyHeightUpdate(){
 		var height3 = $( window ).height()
 		var height1 = $('.nav').height()+50

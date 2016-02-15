@@ -52,3 +52,4 @@ gem "has_permalink"
 gem 'sweet-alert'
 gem 'awesome_print'
 gem "cocoon"
+#gem 'jquery-ui-rails'

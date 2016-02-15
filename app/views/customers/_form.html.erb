@@ -10,8 +10,6 @@
   });
 
   </script>
-
-
   </head>
   <body>
 <%= form_for(@customer) do |f| %>
@@ -62,25 +60,26 @@
       <br><br><br>
       
   <%= f.fields_for :addresses do |addr| %>
-        <hr>
-        <% if addr.index == 0 %>
-           <h3>Customer Addresses 1</h3><br>
-        <% else %>
-         <h3>Customer Addresses 2</h3><br>
-        <% end %>
-          <%= render "addresses/form" , :f => addr %>
-        
+        <hr>       
+           <h3>Customer Addresses <%= (addr.index) +1 %></h3><br>
+          <%= render "addresses/form" , :f => addr %>       
         </hr>
       <% end %>
-       <%#= link_to 'Add Address', f , :addresses %>
+
+      <%#= link_to "Add Address", 'address_form' %>
+          <%#= link_to "Add Address" , (render 'address_form') %>
+       <%#å= link_to 'Add Address' , (render 'address_form') %>
+       <%#= link_to 'Add Address', :addresses  , :data => { :target => "#addresses" } %>
       
-        
+          
     <div class="actions form-group">
         <div class="col-sm-offset-3 col-sm-3">
           <%= f.submit "Create Customer" , class: "btn btn-primary btn-block btn-lg" %>
         </div>
       </div>
       <br><br><br>
+
+
 
 
   

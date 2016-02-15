@@ -1,0 +1,42 @@
+<% @address= Address.new %>
+
+<%= form_for(@address) do |f| %>
+  <div class="field form-group">
+    <div class="col-sm-10">
+      <%= f.text_field :city ,  class: 'form-control' , :placeholder=>'Enter the City' , required: true %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+    <div class="col-sm-10">
+   
+    <%= f.text_field :district ,  class: 'form-control' , :placeholder=>'Enter the District' , required: true %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+    <div class="col-sm-10">
+    
+    <%= f.text_field :state ,  class: 'form-control' , :placeholder=>'Enter the State' , required: true  %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+    <div class="col-sm-10">
+    <%= f.country_select :country , class: 'form-control' , required: true , prompt: "Please Select Country" %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <div class="field form-group">
+    <div class="col-sm-10">
+    <%= f.number_field :pincode ,  class: 'form-control' , :placeholder=>'Enter the Pincode' , required: true  %>
+  </div>
+  </div>
+  <br><br><br>
+
+  <%end%>
+

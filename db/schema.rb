@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210115008) do
+ActiveRecord::Schema.define(version: 20160215062235) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "city",            limit: 255
@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(version: 20160210115008) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "customer_id",   limit: 4
+    t.integer  "address_id",    limit: 4
   end
 
+  add_index "orders", ["address_id"], name: "index_orders_on_address_id", using: :btree
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -94,6 +96,7 @@ ActiveRecord::Schema.define(version: 20160210115008) do
   add_index "products", ["company_id"], name: "index_products_on_company_id", using: :btree
 
   add_foreign_key "addresses", "customers"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "customers"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"

@@ -51,18 +51,12 @@
               <% end %>
             <% end %>
         </td>
-
-            <td><% order.customer.addresses.each do|address| %>
-              <% if address.deliver_address == true %>
-                  <strong>City: </strong><%= address.city rescue ''%><br>
-                  <strong>District: </strong><%= address.district rescue ''%><br>
-                  <strong>State: </strong><%= address.state rescue ''%><br>
-                  <strong>Country: </strong><%= address.country rescue ''%><br>
-                  <strong>Pincode: </strong><%= address.pincode rescue ''%><br>
-              <%end%>
-            <%end%>
-
-
+        <td>
+          <strong>City: </strong><%= order.address.city rescue ''%><br>
+          <strong>District: </strong><%= order.address.district rescue ''%><br>
+          <strong>State: </strong><%= order.address.state rescue ''%><br>
+          <strong>Country: </strong><%= order.address.country rescue ''%><br>
+          <strong>Pincode: </strong><%= order.address.pincode rescue ''%><br>
         </td>
 
         <td><%= link_to  order , class: "btn btn-success", :style=>'color:#FFFFFF;' do %>

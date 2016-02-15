@@ -4,9 +4,10 @@ class Order < ActiveRecord::Base
 	
 
 	has_many :item_lines  
+	belongs_to :address
 	belongs_to :customer 
 	has_many :products ,:through => :item_lines
 
-	#accepts_nested_attributes_for :item_lines
+	accepts_nested_attributes_for :item_lines
 	
 end
