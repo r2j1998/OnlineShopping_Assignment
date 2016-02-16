@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
-  resources :orders
+
+  resources :orders do
+      collection do 
+        get 'autocomplete_email'
+        get 'show_addresses'
+        get 'autocomplete_product'
+        get 'show_product'
+      end
+  end
+
+  resources :order_with_customer
+  # get 'order_with_customer/index'
+
+  # get 'order_with_customer/new'
+
+  # get 'order_with_customer/create'
+
+   #get "orders/order_type"
+  resources :orders  
   resources :addresses
   resources :customers
   resources :products
@@ -7,11 +25,9 @@ Rails.application.routes.draw do
   resources :categories
   root to: "categories#index"
 
-  resources :orders do
-      member do
-          get 'show_addresses'
-      end
-  end
+
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

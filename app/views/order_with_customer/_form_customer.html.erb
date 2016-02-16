@@ -1,0 +1,69 @@
+
+<html>
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <!--script src="//code.jquery.com/jquery-1.10.2.js"></script-->
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $("#mydatepicker").datepicker();
+  });
+
+  </script>
+  </head>
+  <body>
+<%#= form_for(@customer) do |f| %>
+  
+        <h3>Customer Information</h3>
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.email_field :email, autofocus: true  ,  class: 'form-control' , :placeholder=>'Enter the Email Id' , required: true%>
+        </div>
+      </div>
+      <br><br><br>
+
+ <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :fname  ,  class: 'form-control' , :placeholder=>'Enter the First Name' , required: true %>
+        </div>
+      </div>
+      <br><br><br>
+
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :lname  ,  class: 'form-control' , :placeholder=>'Enter the Last Name' , required: true %>
+        </div>
+      </div>
+      <br><br><br>
+        <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.number_field :mobile_no , :placeholder=>'Enter the mobile number', class: 'form-control' , required: true  %>
+        </div>
+      </div>
+      <br><br><br>
+
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :birth_date , :id => "mydatepicker" , :placeholder=>'Enter the Birth Date (DD/MM/YYYY)',class: 'form-control' , required: true  %>
+        </div>
+      </div>
+      <br><br><br>
+      
+  <%= f.fields_for :addresses do |addr| %>
+        <hr>       
+           <h3>Customer Addresses <%#= (addr.index) + 1 %></h3><br>
+          <%= render "addresses/form" , :f => addr %>       
+        </hr>
+      <% end %>
+
+      <%#= link_to "Add Address", 'address_form' %>
+          <%#= link_to "Add Address" , (render 'address_form') %>
+       <%#å= link_to 'Add Address' , (render 'address_form') %>
+       <%#= link_to 'Add Address', :addresses  , :data => { :target => "#addresses" } %>
+      
+
+  
+<%# end %>
+
+</body>
+</html>

@@ -13,10 +13,15 @@ class OrdersController < ApplicationController
     #raise params.inspect
   end
   def show_addresses
-    ap params.inspect
-      @customer = Customer.find(params[:customer_id])
+      
+      @customer = Customer.find_by_email(params[:email])
       @addresses = @customer.addresses   
       respond_to :js 
+  end
+  def show_product
+    
+      @product = Product.find_by_product_name(params[:product_name])
+      respond_to :js
   end
 
   # GET /orders/new
@@ -32,6 +37,15 @@ class OrdersController < ApplicationController
       @item_lines = @order.item_lines  
 
   end
+
+    def autocomplete_email    
+      availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").pluck(:email)   
+      render json: availableCustomers  
+    end
+    def autocomplete_product
+      availableProduct = Product.where('product_name LIKE ?' , "%#{params[:term]}%").pluck(:product_name)
+      render json: availableProduct
+    end
 
   # POST /orders
   # POST /orders.json
@@ -82,6 +96,9 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # def order_type
+    
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,6 +110,7 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params['order'].merge!(:address_id => params['delivery_address'])
+      params['order'].merge!(:customer_id => params['customer_id'])
       #raise params.inspect
       params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type ,  :address_id)
     end

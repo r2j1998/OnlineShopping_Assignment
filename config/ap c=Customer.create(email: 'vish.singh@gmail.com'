@@ -1,0 +1,12 @@
+ap c=Customer.create(email: 'vish.singh@gmail.com', fname: 'vishwajit', lname: 'singh', mobile_no: '9595743456', birth_date: '4-3-1988' , addresses_attributes: [city: 'Pune' ,district: 'pune' , state: 'maharashtra' ,country: 'IN' , pincode:'223333'], addresses_attributes: [city: 'Mumbai' ,district: 'Mumbai' , state: 'Maharashtra' ,country: 'IN', pincode: '555445'])
+
+
+
+ap c=Customer.create(email: 'vish.singh@gmail.com', fname: 'vishwajit', lname: 'singh', mobile_no: '9595743456', birth_date: '4-3-1988' , 2.times{addresses_attributes: [city: 'Pune' ,district: 'pune' , state: 'maharashtra' ,country: 'IN' , pincode:'223333' , deliver_address: false], addresses_attributes: [city: 'Mumbai' ,district: 'Mumbai' , state: 'Maharashtra' ,country: 'IN', pincode: '555445', deliver_address: false]})
+
+
+
+ap c=Customer.create(email: 'vish.singh@gmail.com', fname: 'vishwajit', lname: 'singh', mobile_no: '9595743456', birth_date: '4-3-1988' , 2.times{addresses_attributes: [{ city: 'Pune' } ,{ city: 'Mumbai' },{ district: 'pune'} , { district: 'Mumbai' } , { state: 'maharashtra'} , { state: 'Maharashtra' } ,{ country: 'IN'}  ,{ country: 'IN' }, {pincode:'223333'} ,{ pincode: '555445' }]})
+
+
+ap c=Customer.create(email: 'vish.singh@gmail.com', fname: 'vishwajit', lname: 'singh', mobile_no: '9595743456', birth_date: '4-3-1988' , addresses_attributes: [{city: 'Pune' ,district: 'pune' , state: 'maharashtra' ,country: 'IN' , pincode:'223333'} , { city: 'Mumbai' ,district: 'Mumbai' , state: 'Maharashtra' ,country: 'IN', pincode: '555445' }])

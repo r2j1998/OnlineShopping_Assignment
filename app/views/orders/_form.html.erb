@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+    
     <script type="text/javascript">
       $(document).ready(function(){   
         $("#item_lines_id").click(function () { 
@@ -21,7 +21,7 @@
             document.getElementById("order_order_value").value=0 ;
             
         });
-         $('.quantity_key_event').live('keyup' ,function(event)
+         $('.quantity_key_event').on('keyup' ,function(event)
          {  
                  if(event.keyCode != 8)
                   {
@@ -29,7 +29,7 @@
                   }  
           });
 
-            $('.quantity_key_event').live('keydown' ,function(event)
+            $('.quantity_key_event').on('keydown' ,function(event)
             {  
                 if(event.keyCode == 8)
                   {
@@ -79,95 +79,113 @@
           </ul>
         </div>
       <% end %>
-
+      <br><br><br>
       
-      <br><br><br>
-      <div class="field form-group">
-        <div class="col-sm-10"> 
-            <%= f.collection_select(:customer_id ,  Customer.all , :id ,   :fname,  :prompt => 'Select Customer') %>  
-        </div>
-      </div>
-      <br><br><br>
-      <div class="showaddress">
-
-
-      </div>
-
-      <script type="text/javascript">
-        
+      <script type="text/javascript">        
             $(document).ready(function(){ 
-                       $("#order_customer_id").change(function () { 
-                          var selectedText = $(this).find("option:selected").text();
-                          var selectedValue = $(this).val();
-                            if(selectedValue=="")
-                            {
-                               //alert(selectedValue);
-                                $(".showaddress").html("<font color= 'red'>Please Select Customer</font>");
-                            }
-                            else
-                            {
-                                    //alert(selectedValue);
-                                $.ajax({
-                                    type: "get",
-                                    url: "/orders/"+selectedValue+"/show_addresses" ,
-                                    data: 'customer_id='+selectedValue , 
-                                    success: function(data){
-                                      $(".showaddress").html(data);
-                                      //alert(data);
-                                    }
-                                });
-                            }
                       
+                    $("#customeremail").on('keyup' , function(event){
+
+                       $("#customeremail").autocomplete({
+                            source: "/orders/autocomplete_email"
                        });
-                        var availableCustomers = "<%= Customer.pluck(:email) %> ";
-                          $(".test").html(availableCustomers);
-                          $("#demotest").autocomplete({
-                            source: availableCustomers
-                        });
-                      });
+                    });
+                    $("#getaddresses").click(function(){
+                      email = document.getElementById("customeremail").value;  
+                        $.ajax({
+                            type: "get",
+                            url: " /orders/show_addresses" ,
+                            data: 'email='+email , 
+                            success: function(data){                             
+                            }
+                        }); 
+                    });
+                      
+                    $("#product_name").on('keyup' , function(event){
 
-      </script>
-                
-                
-                <% @all_products.each do |product| %>
-                  <%= hidden_field_tag "h_#{product.id}" , product.price %>
-                <% end %>
+                       $("#product_name").autocomplete({
+                            source: "/orders/autocomplete_product"
+                       });
+                    });
 
+
+                    $("#getproduct").click(function(){
+                      product_name = document.getElementById("product_name").value;  
+                        $.ajax({
+                            type: "get",
+                            url: " /orders/show_product" ,
+                            data: 'product_name='+product_name , 
+                            success: function(data){                             
+                            }
+                        }); 
+                    });
+
+            });
+      </script>               
+          <div class="field form-group">
+            <div class="col-sm-6">
+              <%= f.text_field :customer_id ,class: 'form-control' , :placeholder=>'Enter the Customer email id' , id: 'customeremail' , required: true %>
+            </div>
+            <div class="col-sm-3">
+              <%= button_tag "View Addresses" , type: 'button' , id: 'getaddresses' ,class: 'form-control btn btn-primary' %>
+            </div>
+          </div>
+          <br><br><br>
+           <div class="showaddress">
+           </div>
+           <div class="showproduct">
+           </div>
+
+
+
+          <div class="field form-group">
+            <div class="col-sm-6">
+              <%= text_field_tag  "product_name" ,nil,class: 'form-control' , :placeholder=>'Enter the product name' , id: 'product_name' , required: true %>
+            </div>
+            <div class="col-sm-3">
+                <%= button_tag "Select" , type: 'button' , id: 'getproduct' ,class: 'form-control btn btn-primary' %>
+            </div>
+          </div>
+
+           
+
+
+
+
+          <% @all_products.each do |product| %>
+              <%= hidden_field_tag "h_#{product.id}" , product.price %>
+          <% end %>
       <div class="field form-group">
-
         <%= f.fields_for :item_lines do |ab| %>
-
         <%= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
         <div class="col-sm-6">
-         <%= ab.collection_select(:product_id,  @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
-
-
+         <%= collection_select(:item_lines, :id  , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
           <%#= ab.collection_select(:item_lines, :id , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
           </div> 
         <% end %>   
       </div>
       <br><br><br><br>
 
-       <font color="blue"><strong><p id="myHeader">Please Select Products</p></strong></font>
-       <br><br><br>
-              
-      <div class="field form-group">
-            <div class="col-sm-6">
-        <%= f.number_field :order_no ,class: 'form-control' , :placeholder=>'Enter the Order Number' , required: true%>
-         </div>
-          </div>
-          <br><br><br>
+        <font color="blue"><strong><p id="myHeader">Please Select Products</p></strong></font>
+       <br><br><br>  
 
-     <div class="field form-group">
-            <div class="col-sm-6">
-        <%= f.number_field :tracking_no ,class: 'form-control' , :placeholder=>'Enter the Tracking number' , required: true%>
-         </div>
-          </div>
-          <br><br><br>
+      <div class="field form-group">
+        <div class="col-sm-6">
+          <%= f.number_field :order_no ,class: 'form-control' , :placeholder=>'Enter the Order Number' , required: true%>
+        </div>
+      </div>
+      <br><br><br>
+
+      <div class="field form-group">
+        <div class="col-sm-6">
+          <%= f.number_field :tracking_no ,class: 'form-control' , :placeholder=>'Enter the Tracking number' , required: true%>
+        </div>
+      </div>
+      <br><br><br>
 
       <div class="field">
         
-        <%= f.hidden_field :delivery_date,  value: Time.now + 7.days %>
+          <%= f.hidden_field :delivery_date,  value: Time.now + 7.days %>
       </div>
 
 

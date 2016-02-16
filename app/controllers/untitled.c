@@ -1,4 +1,0 @@
-ap c=Customer.create(email: 'vish.singh12323@gmail.com', fname: 'vishwajit11', lname: 'singh11', mobile_no: '9595743456', birth_date: '4-3-1988' , addresses_attributes: [city: 'Pune' , city: 'Mumbai' , district: 'pune', district: 'Mumbai', state: 'maharashtra' ,state: 'Maharashtra' ,country: 'IN' , country: 'IN' , pincode:'223333' ,pincode: '555445'])
-
-
-ap c=Customer.create(email: 'vish.singh123@gmail.com', fname: 'vishwajit1', lname: 'singh1', mobile_no: '9595743456', birth_date: '4-3-1988' , addresses_attributes: [city: 'Pune' ,district: 'pune' , state: 'maharashtra' ,country: 'IN' , pincode:'223333'], addresses_attributes: [city: 'Mumbai' ,district: 'Mumbai' , state: 'Maharashtra' ,country: 'IN', pincode: '555445'])
