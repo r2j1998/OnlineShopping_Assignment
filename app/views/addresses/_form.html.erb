@@ -31,7 +31,7 @@
     <%#= f.radio_button "deliver_address" ,  "true" , :id => "deliver_address_#{f.index}"  %> 
   <div class="field form-group">
     <div class="col-sm-10">
-      <%= f.text_field :city ,  class: 'form-control' , :placeholder=>'Enter the City' , required: true %>
+      <%= f.text_field :city ,  class: 'form-control' , :placeholder=>'Enter the City' %>
   </div>
   </div>
   <br><br><br>
@@ -39,7 +39,7 @@
   <div class="field form-group">
     <div class="col-sm-10">
    
-    <%= f.text_field :district ,  class: 'form-control' , :placeholder=>'Enter the District' , required: true %>
+    <%= f.text_field :district ,  class: 'form-control' , :placeholder=>'Enter the District' %>
   </div>
   </div>
   <br><br><br>
@@ -47,21 +47,21 @@
   <div class="field form-group">
     <div class="col-sm-10">
     
-    <%= f.text_field :state ,  class: 'form-control' , :placeholder=>'Enter the State' , required: true  %>
+    <%= f.text_field :state ,  class: 'form-control' , :placeholder=>'Enter the State'  %>
   </div>
   </div>
   <br><br><br>
 
   <div class="field form-group">
     <div class="col-sm-10">
-    <%= f.country_select :country , class: 'form-control' , required: true , prompt: "Please Select Country" %>
+    <%= f.country_select :country , class: 'form-control' ,  prompt: "Please Select Country" %>
   </div>
   </div>
   <br><br><br>
 
   <div class="field form-group">
     <div class="col-sm-10">
-    <%= f.number_field :pincode ,  class: 'form-control' , :placeholder=>'Enter the Pincode' , required: true  %>
+    <%= f.number_field :pincode ,  class: 'form-control' , :placeholder=>'Enter the Pincode'  %>
   </div>
   </div>
   <br><br><br>

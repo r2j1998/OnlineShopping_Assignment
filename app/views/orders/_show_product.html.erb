@@ -1,4 +1,13 @@
-<div class='jumbotron'>	
+<!--div class='jumbotron'-->	
 
-<%= @product.product_name %>
-</div>
+
+
+ 
+   	<tr>
+    	<td valign="top"><%= label_tag @product.product_name %> :  </td>
+		<td><%= text_field_tag "price" ,nil , :value => @product.price ,class: 'form-control  col col-sm-3'  , id: "price_#{@product.id}", disabled: true %></td>
+		<td><%#= text_field_tag "quantity" ,nil , class: 'form-control   col col-sm-5 quantity_key_event'  , id: "quantity_#{@product.id}" , required: true ,  placeholder: 'Enter the quantity' %></td>
+
+	</tr>
+
+<!--/div-->

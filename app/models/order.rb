@@ -8,6 +8,8 @@ class Order < ActiveRecord::Base
 	belongs_to :customer 
 	has_many :products ,:through => :item_lines
 
-	accepts_nested_attributes_for :item_lines
+	accepts_nested_attributes_for :customer ,
+								  :reject_if => :all_blank,
+           						  :allow_destroy => true
 	
 end

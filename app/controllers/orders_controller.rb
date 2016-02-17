@@ -27,8 +27,10 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @all_products =Product.all
-    @item_lines = @order.item_lines.build    
+    #@all_products =Product.all
+    @customer=@order.build_customer
+    @customer.addresses.build
+    #@item_lines = @order.item_lines.build    
   end
 
   # GET /orders/1/edit
@@ -50,13 +52,14 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    
     raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
       if @order.save
-          product_hash = params.require(:item_lines)
-          product_hash["id"].each do |product|
+          product_hash = params[:product_ids].split(',')
+          product_hash.each do |product|
 
               if product.to_s.empty?
               else
@@ -109,9 +112,16 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params['order'].merge!(:address_id => params['delivery_address'])
-      params['order'].merge!(:customer_id => params['customer_id'])
-      #raise params.inspect
-      params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type ,  :address_id)
+       #raise params.inspect
+        if params[:new_customer]=="true"            
+             params.require(:order).permit(:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type, customer_attributes: [:email, :fname, :lname, :mobile_no, :birth_date, addresses_attributes: [ :city, :district, :state, :country, :pincode]])                                
+        else
+              
+          params['order'].merge!(:address_id => params['delivery_address'])
+          params['order'].merge!(:customer_id => params['customer_id'])           
+          params.require(:order).permit(:customer_id , :order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type ,  :address_id)
+        end
+      
+     
     end
 end

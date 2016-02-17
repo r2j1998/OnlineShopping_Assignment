@@ -1,0 +1,41 @@
+
+ <h3>Customer Information</h3>
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.email_field :email, autofocus: true  ,  class: 'form-control' , :placeholder=>'Enter the Email Id' %>
+        </div>
+      </div>
+      <br><br><br>
+ <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :fname  ,  class: 'form-control' , :placeholder=>'Enter the First Name' %>
+        </div>
+      </div>
+      <br><br><br>
+
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :lname  ,  class: 'form-control' , :placeholder=>'Enter the Last Name'  %>
+        </div>
+      </div>
+      <br><br><br>
+        <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.number_field :mobile_no , :placeholder=>'Enter the mobile number', class: 'form-control' %>
+        </div>
+      </div>
+      <br><br><br>
+
+      <div class="field form-group">
+        <div class="col-sm-10">
+          <%= f.text_field :birth_date , :id => "mydatepicker" , :placeholder=>'Enter the Birth Date (DD/MM/YYYY)',class: 'form-control'  %>
+        </div>
+      </div>
+      <br><br><br>
+      
+  <%= f.fields_for :addresses do |addr| %>
+    <hr>       
+       <h3>Customer Addresses <%= (addr.index) +1 %></h3><br>
+      <%= render "addresses/form" , :f => addr %>       
+    </hr>
+   <% end %>

@@ -1,1 +1,14 @@
-$(".showproduct").append("<%= escape_javascript(render '/orders/show_product') %> ");
+$(".showproduct").show();
+var ids = document.getElementById("product_ids").value;
+ document.getElementById("product_ids").value= ids+ ",<%= @product.id %>";
+$(".showproduct").append("<%= escape_javascript(render '/orders/show_product') %>");
+
+
+
+$('.quantity_key_event').on('keyup' ,function(event)
+{                 
+    var idss = document.getElementById("product_ids").value;
+    var split_ids = idss.split(',');
+    alert(split_ids);
+
+});

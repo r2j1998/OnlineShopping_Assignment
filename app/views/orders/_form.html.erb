@@ -2,68 +2,6 @@
 
 <html>
   <head>
-    
-    <script type="text/javascript">
-      $(document).ready(function(){   
-        $("#item_lines_id").click(function () { 
-          var str ="";
-           $('#item_lines_id option:selected').each(function(){
-              str+="<br><br>"+$(this).text() + " <br>Price Per Item : <input type='text' id=price_"+$(this).val()+" class='form-control' readonly> <br> <br> Qantity: <input type='text' id=quantity_"+$(this).val()+" class='col-sm-3 form-control quantity_key_event' required placeholder='Enter the Product Quantity'><br> ";
-           }); 
-          document.getElementById("myHeader").innerHTML= str;
-
-            $('#item_lines_id option:selected').each(function(){
-
-                val1=document.getElementById("h_"+$(this).val()).value;
-                document.getElementById("price_"+$(this).val()).value=val1;
-            });
-            document.getElementById("order_amount").value=0 ;
-            document.getElementById("order_order_value").value=0 ;
-            
-        });
-         $('.quantity_key_event').on('keyup' ,function(event)
-         {  
-                 if(event.keyCode != 8)
-                  {
-                    doMath($(this).val() , this.id , 1);  
-                  }  
-          });
-
-            $('.quantity_key_event').on('keydown' ,function(event)
-            {  
-                if(event.keyCode == 8)
-                  {
-                    doMath($(this).val() , this.id , 2);
-                  }               
-            });
-      });
-        function  doMath(product_quantity ,quantity_id ,no) { 
-          
-          var price = quantity_id.split('quantity_');
-          var price_id = "price_"+price[1];
-          var product_price; var amount=0;
-          var total_quantity = document.getElementById("order_order_value").value
-          amount = document.getElementById("order_amount").value;   
-         product_price = document.getElementById(price_id).value;  
-
-            if(no==1)
-            {
-                amount=(parseInt(amount)+(parseInt(product_quantity)*parseInt(product_price)));
-                total_quantity= (parseInt(total_quantity)+ parseInt(product_quantity))
-            }
-            else
-            {
-                alert(product_quantity);
-                amount=(parseInt(amount)-(parseInt(product_quantity)*parseInt(product_price)));
-                document.getElementById(quantity_id).value=0 ;
-                total_quantity= (parseInt(total_quantity)-parseInt(product_quantity))
-            }        
-                 
-         document.getElementById("order_amount").value=amount ;
-         document.getElementById("order_order_value").value=total_quantity;
-      }       
-        
-    </script>
     <title></title>
   </head>
   <body>
@@ -83,6 +21,8 @@
       
       <script type="text/javascript">        
             $(document).ready(function(){ 
+
+                      $(".showproduct").hide();
                       
                     $("#customeremail").on('keyup' , function(event){
 
@@ -118,55 +58,139 @@
                             success: function(data){                             
                             }
                         }); 
+                        document.getElementById("product_name").value="";
+                         $(".showaddress").show();
                     });
 
+                      $("#new_customer_true").click(function(){
+                          $("#existing_customer_true").prop('checked', false);
+                            document.getElementById("customeremail").value="";
+                            document.getElementById("customeremail").readOnly = true;
+                            document.getElementById("customeremail_new").readOnly = false;
+
+                            document.getElementById("order_customer_attributes_email").readOnly = false;
+                            document.getElementById("order_customer_attributes_fname").readOnly = false;
+                            document.getElementById("order_customer_attributes_lname").readOnly = false;
+                            document.getElementById("order_customer_attributes_mobile_no").readOnly = false;
+                            document.getElementById("mydatepicker").readOnly = false;
+
+                            document.getElementById("order_customer_attributes_addresses_attributes_0_city").readOnly = false;
+                            document.getElementById("order_customer_attributes_addresses_attributes_0_district").readOnly = false;
+                            document.getElementById("order_customer_attributes_addresses_attributes_0_state").readOnly = false;
+                            document.getElementById("order_customer_attributes_addresses_attributes_0_country").readOnly = false;
+                            document.getElementById("order_customer_attributes_addresses_attributes_0_pincode").readOnly = false;
+
+                            // document.getElementById("order_customer_attributes_addresses_attributes_1_city").readOnly = false;
+                            // document.getElementById("order_customer_attributes_addresses_attributes_1_district").readOnly = false;
+                            // document.getElementById("order_customer_attributes_addresses_attributes_1_state").readOnly = false;
+                            // document.getElementById("order_customer_attributes_addresses_attributes_1_country").readOnly = false;
+                            // document.getElementById("order_customer_attributes_addresses_attributes_1_pincode").readOnly = false;
+
+
+                         $(".customer_form").show();
+                          $(".showaddress").hide();
+                      });
+                      $("#existing_customer_true").click(function(){
+                          $("#new_customer_true").prop('checked', false);
+                          document.getElementById("customeremail_new").value="";
+                          document.getElementById("customeremail_new").readOnly = true;
+                          document.getElementById("customeremail").readOnly = false;
+
+                          document.getElementById("order_customer_attributes_email").readOnly = true;
+                          document.getElementById("order_customer_attributes_fname").readOnly = true;
+                          document.getElementById("order_customer_attributes_lname").readOnly = true;
+                          document.getElementById("order_customer_attributes_mobile_no").readOnly = true;
+                          document.getElementById("mydatepicker").readOnly = true;
+                          
+
+                          document.getElementById("order_customer_attributes_addresses_attributes_0_city").readOnly = true;
+                          document.getElementById("order_customer_attributes_addresses_attributes_0_district").readOnly = true;
+                          document.getElementById("order_customer_attributes_addresses_attributes_0_state").readOnly = true;
+                          document.getElementById("order_customer_attributes_addresses_attributes_0_country").readOnly = true;
+                          document.getElementById("order_customer_attributes_addresses_attributes_0_pincode").readOnly = true;
+
+                          // document.getElementById("order_customer_attributes_addresses_attributes_1_city").readOnly = true;
+                          // document.getElementById("order_customer_attributes_addresses_attributes_1_district").readOnly = true;
+                          // document.getElementById("order_customer_attributes_addresses_attributes_1_state").readOnly = true;
+                          // document.getElementById("order_customer_attributes_addresses_attributes_1_country").readOnly = true;
+                          // document.getElementById("order_customer_attributes_addresses_attributes_1_pincode").readOnly = true;
+
+                            $(".customer_form").hide();
+                            $(".showaddress").show();
+                      });
+                        $(".customer_form").hide();
+                      document.getElementById("customeremail").readOnly = true;
+                      document.getElementById("customeremail_new").readOnly = true;
+
+
             });
-      </script>               
-          <div class="field form-group">
-            <div class="col-sm-6">
-              <%= f.text_field :customer_id ,class: 'form-control' , :placeholder=>'Enter the Customer email id' , id: 'customeremail' , required: true %>
+      </script>
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                   <%= radio_button_tag "existing_customer" , true %>
+                </span>
+                <%= f.text_field :customer_id ,class: 'form-control' , :placeholder=>'Enter the existing customer email id' , id: 'customeremail' %>
+              </div>     
             </div>
             <div class="col-sm-3">
-              <%= button_tag "View Addresses" , type: 'button' , id: 'getaddresses' ,class: 'form-control btn btn-primary' %>
+                <%= button_tag "Show addresses" , type: 'button' , id: 'getaddresses' ,class: 'form-control btn btn-primary' %>
             </div>
+            <br><br><br>
+
+            <div class="showaddress">
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                   <%= radio_button_tag "new_customer" , true %>
+                </span>
+                  <%= f.text_field "customer_id" ,class: 'form-control' , :placeholder=>'Enter the new customer email id' , id: 'customeremail_new' %>
+              </div>
+            </div>
+
+            <br><br><br>
+            
+          <div class="customer_form"> 
+                      
+            <%= f.fields_for :customer do |c| %>
+                <%= render "customerform" , f: c %>
+            <% end %>
           </div>
+
           <br><br><br>
-           <div class="showaddress">
-           </div>
-           <div class="showproduct">
-           </div>
 
-
-
+          
           <div class="field form-group">
             <div class="col-sm-6">
-              <%= text_field_tag  "product_name" ,nil,class: 'form-control' , :placeholder=>'Enter the product name' , id: 'product_name' , required: true %>
+              <%= text_field_tag  "product_name" ,nil,class: 'form-control' , :placeholder=>'Enter the product name' , id: 'product_name' %>
             </div>
             <div class="col-sm-3">
                 <%= button_tag "Select" , type: 'button' , id: 'getproduct' ,class: 'form-control btn btn-primary' %>
             </div>
           </div>
+           <br><br><br>
+          <div class="showproduct jumbotron">
+              <%= hidden_field_tag "product_ids" ,nil , :multiple => true %><br><br>
+          </div>
 
            
-
-
-
-
-          <% @all_products.each do |product| %>
-              <%= hidden_field_tag "h_#{product.id}" , product.price %>
-          <% end %>
-      <div class="field form-group">
-        <%= f.fields_for :item_lines do |ab| %>
-        <%= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
+            
+          <%# @all_products.each do |product| %>
+              <%#= hidden_field_tag "h_#{product.id}" , product.price %>
+          <%# end %>
+      <!--div class="field form-group">
+        <%#= f.fields_for :item_lines do |ab| %>
+        <%#= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
         <div class="col-sm-6">
-         <%= collection_select(:item_lines, :id  , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
+         <%#= collection_select(:item_lines, :id  , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
           <%#= ab.collection_select(:item_lines, :id , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
           </div> 
-        <% end %>   
+        <%# end %>   
       </div>
       <br><br><br><br>
 
-        <font color="blue"><strong><p id="myHeader">Please Select Products</p></strong></font>
+        <font color="blue"><strong><p id="myHeader">Please Select Products</p></strong></font-->
        <br><br><br>  
 
       <div class="field form-group">
@@ -192,7 +216,7 @@
 
       <div class="field form-group">
             <div class="col-sm-6">
-        <%= f.text_field :order_value ,class: 'form-control' , value: '0' ,  :placeholder=>'Enter the Order Value' , required: true , readonly: true%>
+        <%= f.text_field :order_value ,class: 'form-control' ,  :placeholder=>'Enter the Order Value' , required: true %>
          </div>
           </div>
           <br><br><br>
@@ -200,7 +224,7 @@
 
       <div class="field form-group">
             <div class="col-sm-6">
-        <%= f.text_field :amount ,class: 'form-control' ,  value: '0' , :placeholder=>'Enter the Amount' , readonly: true , required: true%>
+        <%= f.text_field :amount ,class: 'form-control' ,   :placeholder=>'Enter the Amount' , required: true%>
          </div>
           </div>
           <br><br><br>
