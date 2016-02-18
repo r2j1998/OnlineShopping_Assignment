@@ -29,8 +29,8 @@
     <% @customers.each do |customer| %>
       <tr>
         <td><%= customer.email %></td>
-        <td><%= customer.fname %></td>
-        <td><%= customer.lname %></td>
+        <td><%= customer.fname.capitalize %></td>
+        <td><%= customer.lname.capitalize %></td>
         <td><%= customer.mobile_no rescue ''%></td>
        
         <td><%= link_to  customer , class: "btn btn-success", :style=>'color:#FFFFFF;' do%>

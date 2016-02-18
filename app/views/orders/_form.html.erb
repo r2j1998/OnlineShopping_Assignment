@@ -20,117 +20,129 @@
       <br><br><br>
       
       <script type="text/javascript">        
-            $(document).ready(function(){ 
+          $(document).ready(function(){ 
 
-                      $(".showproduct").hide();
-                      
-                    $("#customeremail").on('keyup' , function(event){
+            $(".showproduct").hide();
+              
+            $("#customeremail").on('keyup' , function(event){
 
-                       $("#customeremail").autocomplete({
-                            source: "/orders/autocomplete_email"
-                       });
-                    });
-                    $("#getaddresses").click(function(){
-                      email = document.getElementById("customeremail").value;  
-                        $.ajax({
-                            type: "get",
-                            url: " /orders/show_addresses" ,
-                            data: 'email='+email , 
-                            success: function(data){                             
-                            }
-                        }); 
-                    });
-                      
-                    $("#product_name").on('keyup' , function(event){
-
-                       $("#product_name").autocomplete({
-                            source: "/orders/autocomplete_product"
-                       });
-                    });
-
-
-                    $("#getproduct").click(function(){
-                      product_name = document.getElementById("product_name").value;  
-                        $.ajax({
-                            type: "get",
-                            url: " /orders/show_product" ,
-                            data: 'product_name='+product_name , 
-                            success: function(data){                             
-                            }
-                        }); 
-                        document.getElementById("product_name").value="";
-                         $(".showaddress").show();
-                    });
-
-                      $("#new_customer_true").click(function(){
-                          $("#existing_customer_true").prop('checked', false);
-                            document.getElementById("customeremail").value="";
-                            document.getElementById("customeremail").readOnly = true;
-                            document.getElementById("customeremail_new").readOnly = false;
-
-                            document.getElementById("order_customer_attributes_email").readOnly = false;
-                            document.getElementById("order_customer_attributes_fname").readOnly = false;
-                            document.getElementById("order_customer_attributes_lname").readOnly = false;
-                            document.getElementById("order_customer_attributes_mobile_no").readOnly = false;
-                            document.getElementById("mydatepicker").readOnly = false;
-
-                            document.getElementById("order_customer_attributes_addresses_attributes_0_city").readOnly = false;
-                            document.getElementById("order_customer_attributes_addresses_attributes_0_district").readOnly = false;
-                            document.getElementById("order_customer_attributes_addresses_attributes_0_state").readOnly = false;
-                            document.getElementById("order_customer_attributes_addresses_attributes_0_country").readOnly = false;
-                            document.getElementById("order_customer_attributes_addresses_attributes_0_pincode").readOnly = false;
-
-                            // document.getElementById("order_customer_attributes_addresses_attributes_1_city").readOnly = false;
-                            // document.getElementById("order_customer_attributes_addresses_attributes_1_district").readOnly = false;
-                            // document.getElementById("order_customer_attributes_addresses_attributes_1_state").readOnly = false;
-                            // document.getElementById("order_customer_attributes_addresses_attributes_1_country").readOnly = false;
-                            // document.getElementById("order_customer_attributes_addresses_attributes_1_pincode").readOnly = false;
-
-
-                         $(".customer_form").show();
-                          $(".showaddress").hide();
-                      });
-                      $("#existing_customer_true").click(function(){
-                          $("#new_customer_true").prop('checked', false);
-                          document.getElementById("customeremail_new").value="";
-                          document.getElementById("customeremail_new").readOnly = true;
-                          document.getElementById("customeremail").readOnly = false;
-
-                          document.getElementById("order_customer_attributes_email").readOnly = true;
-                          document.getElementById("order_customer_attributes_fname").readOnly = true;
-                          document.getElementById("order_customer_attributes_lname").readOnly = true;
-                          document.getElementById("order_customer_attributes_mobile_no").readOnly = true;
-                          document.getElementById("mydatepicker").readOnly = true;
-                          
-
-                          document.getElementById("order_customer_attributes_addresses_attributes_0_city").readOnly = true;
-                          document.getElementById("order_customer_attributes_addresses_attributes_0_district").readOnly = true;
-                          document.getElementById("order_customer_attributes_addresses_attributes_0_state").readOnly = true;
-                          document.getElementById("order_customer_attributes_addresses_attributes_0_country").readOnly = true;
-                          document.getElementById("order_customer_attributes_addresses_attributes_0_pincode").readOnly = true;
-
-                          // document.getElementById("order_customer_attributes_addresses_attributes_1_city").readOnly = true;
-                          // document.getElementById("order_customer_attributes_addresses_attributes_1_district").readOnly = true;
-                          // document.getElementById("order_customer_attributes_addresses_attributes_1_state").readOnly = true;
-                          // document.getElementById("order_customer_attributes_addresses_attributes_1_country").readOnly = true;
-                          // document.getElementById("order_customer_attributes_addresses_attributes_1_pincode").readOnly = true;
-
-                            $(".customer_form").hide();
-                            $(".showaddress").show();
-                      });
-                        $(".customer_form").hide();
-                      document.getElementById("customeremail").readOnly = true;
-                      document.getElementById("customeremail_new").readOnly = true;
-
-
+               $("#customeremail").autocomplete({
+                    source: "/orders/autocomplete_email"
+               });
             });
+            $("#getaddresses").click(function(){
+              email = document.getElementById("customeremail").value;
+                    if (email=='') 
+                    {
+                       sweetAlert("Oops...", "Please Enter Email Id", "error");
+                    } 
+                    else
+                    {
+                      $.ajax({
+                        type: "get",
+                        url: " /orders/show_addresses" ,
+                        data: 'email='+email , 
+                        success: function(data){
+
+                        
+                        } ,
+                        error: function (data) {
+                          sweetAlert("Oops...", "Please Enter Valid Email Id", "error");
+                          document.getElementById("customeremail").value="";
+                        }
+                      }); 
+                    }               
+            });
+              
+            $("#product_name").on('keyup' , function(event){
+
+               $("#product_name").autocomplete({
+                    source: "/orders/autocomplete_product"
+               });
+            });
+
+
+            $("#getproduct").click(function(){
+              product_name = document.getElementById("product_name").value;  
+
+                if(product_name=='')
+                {
+                    sweetAlert("Oops...", "Please enter product name", "error");
+                }
+                else
+                {
+                  $.ajax({
+                    type: "get",
+                    url: " /orders/show_product" ,
+                    data: 'product_name='+product_name , 
+                    success: function(data){}
+                  }); 
+                }
+                
+                document.getElementById("product_name").value="";
+                $(".showaddress").show();
+            });
+
+              $("#new_customer_true").click(function(){
+
+                $("#existing_customer_true").prop('checked', false);
+                document.getElementById("customeremail").value="";
+                document.getElementById("customeremail").readOnly = true;
+                document.getElementById("customeremail_new").readOnly = false;
+
+                document.getElementById('customer_block').style.display = "block";
+               
+                document.getElementById("order_customer_attributes_email").setAttribute("required", "true"); 
+                document.getElementById("order_customer_attributes_fname").setAttribute("required", "true"); 
+                document.getElementById("order_customer_attributes_lname").setAttribute("required", "true"); 
+                document.getElementById("order_customer_attributes_mobile_no").setAttribute("required", "true"); 
+                document.getElementById("mydatepicker").setAttribute("required", "true"); 
+
+                document.getElementById("order_address_attributes_city").setAttribute("required", "true"); 
+                document.getElementById("order_address_attributes_district").setAttribute("required", "true"); 
+                document.getElementById("order_address_attributes_state").setAttribute("required", "true"); 
+                document.getElementById("order_address_attributes_country").setAttribute("required", "true"); 
+                document.getElementById("order_address_attributes_pincode").setAttribute("required", "true"); 
+
+                                            
+                $(".customer_form").show();
+                $(".showaddress").hide();
+              });
+              $("#existing_customer_true").click(function(){
+                document.getElementById('customer_block').style.display = "";
+                $("#new_customer_true").prop('checked', false);
+                document.getElementById("customeremail_new").value="";
+
+                document.getElementById("customeremail_new").readOnly = true;
+                document.getElementById("customeremail").readOnly = false;
+
+                document.getElementById("order_customer_attributes_email").removeAttribute("required"); 
+                document.getElementById("order_customer_attributes_fname").removeAttribute("required"); 
+                document.getElementById("order_customer_attributes_lname").removeAttribute("required"); 
+                document.getElementById("order_customer_attributes_mobile_no").removeAttribute("required"); 
+                document.getElementById("mydatepicker").removeAttribute("required"); 
+
+                document.getElementById("order_address_attributes_city").removeAttribute("required");
+                document.getElementById("order_address_attributes_district").removeAttribute("required");
+                document.getElementById("order_address_attributes_state").removeAttribute("required");
+                document.getElementById("order_address_attributes_country").removeAttribute("required");
+                document.getElementById("order_address_attributes_pincode").removeAttribute("required");
+
+
+                $(".customer_form").hide();
+                $(".showaddress").show();
+              });
+              $(".customer_form").hide();
+              document.getElementById("customeremail").readOnly = true;
+              document.getElementById("customeremail_new").readOnly = true;
+            });             
       </script>
             <div class="col-lg-6">
               <div class="input-group">
                 <span class="input-group-addon">
                    <%= radio_button_tag "existing_customer" , true %>
                 </span>
-                <%= f.text_field :customer_id ,class: 'form-control' , :placeholder=>'Enter the existing customer email id' , id: 'customeremail' %>
+                <%= f.email_field :customer_id ,class: 'form-control' , :placeholder=>'Enter the existing customer email id' , id: 'customeremail' %>
               </div>     
             </div>
             <div class="col-sm-3">
@@ -145,22 +157,27 @@
                 <span class="input-group-addon">
                    <%= radio_button_tag "new_customer" , true %>
                 </span>
-                  <%= f.text_field "customer_id" ,class: 'form-control' , :placeholder=>'Enter the new customer email id' , id: 'customeremail_new' %>
+                  <%= f.email_field "customer_id" ,class: 'form-control' , :placeholder=>'Enter the new customer email id' , id: 'customeremail_new' %>
               </div>
             </div>
 
             <br><br><br>
             
-          <div class="customer_form"> 
+          <div class="customer_form" id="customer_block"> 
                       
             <%= f.fields_for :customer do |c| %>
                 <%= render "customerform" , f: c %>
+
+            <% end %>
+            <%= f.fields_for :address do |a| %>
+              <hr>       
+                <h3>Customer Address</h3><br>
+                <%= render "addresses/form" , f: a %>
+              </hr>                
             <% end %>
           </div>
+          <br><br><br>  
 
-          <br><br><br>
-
-          
           <div class="field form-group">
             <div class="col-sm-6">
               <%= text_field_tag  "product_name" ,nil,class: 'form-control' , :placeholder=>'Enter the product name' , id: 'product_name' %>
@@ -170,27 +187,10 @@
             </div>
           </div>
            <br><br><br>
+
           <div class="showproduct jumbotron">
-              <%= hidden_field_tag "product_ids" ,nil , :multiple => true %><br><br>
+              <%= hidden_field_tag "product_ids" ,nil , :multiple => true  %><br><br>
           </div>
-
-           
-            
-          <%# @all_products.each do |product| %>
-              <%#= hidden_field_tag "h_#{product.id}" , product.price %>
-          <%# end %>
-      <!--div class="field form-group">
-        <%#= f.fields_for :item_lines do |ab| %>
-        <%#= ab.label "All Products" , class: 'col-sm-2 control-label' %><br><br>
-        <div class="col-sm-6">
-         <%#= collection_select(:item_lines, :id  , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
-          <%#= ab.collection_select(:item_lines, :id , @all_products , :id, :product_name , {:required => true} , {:multiple => true , class: 'form-control'}) %> 
-          </div> 
-        <%# end %>   
-      </div>
-      <br><br><br><br>
-
-        <font color="blue"><strong><p id="myHeader">Please Select Products</p></strong></font-->
        <br><br><br>  
 
       <div class="field form-group">
@@ -212,8 +212,6 @@
           <%= f.hidden_field :delivery_date,  value: Time.now + 7.days %>
       </div>
 
-
-
       <div class="field form-group">
             <div class="col-sm-6">
         <%= f.text_field :order_value ,class: 'form-control' ,  :placeholder=>'Enter the Order Value' , required: true %>
@@ -228,8 +226,6 @@
          </div>
           </div>
           <br><br><br>
-
-
         <div class="field form-group">
             <%=  f.label :delivery_type  , class: 'col-sm-3 control-label'%><br><br>
             <div class="col-sm-6">
@@ -238,12 +234,9 @@
           </div>
         </div>
         <br><br>
-
-     
-
        <div class="actions form-group">
             <div class="col-sm-offset-3 col-sm-3">
-              <%= f.submit "Create Order" , class: "btn btn-primary btn-block btn-lg" %>
+              <%= f.submit "Create Order"  ,class: "btn btn-primary btn-block btn-lg" %>
             </div>
           </div> 
           <div class="actions form-group">

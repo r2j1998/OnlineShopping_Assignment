@@ -26,11 +26,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
-    #@all_products =Product.all
-    @customer=@order.build_customer
-    @customer.addresses.build
-    #@item_lines = @order.item_lines.build    
+    @order = Order.new    
+    @order.build_customer
+    @order.build_address
   end
 
   # GET /orders/1/edit
@@ -53,11 +51,14 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     
-    raise params.inspect
+    #raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
       if @order.save
+        if params[:new_customer]=="true"
+            Address.where( id: @order.address_id ).update_all( customer_id: @order.customer_id )
+        end
           product_hash = params[:product_ids].split(',')
           product_hash.each do |product|
 
@@ -111,10 +112,11 @@ class OrdersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+
     def order_params
        #raise params.inspect
-        if params[:new_customer]=="true"            
-             params.require(:order).permit(:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type, customer_attributes: [:email, :fname, :lname, :mobile_no, :birth_date, addresses_attributes: [ :city, :district, :state, :country, :pincode]])                                
+        if params[:new_customer]=="true"        
+          params.require(:order).permit(:order_no, :tracking_no, :delivery_date, :order_value, :amount, :delivery_type,  customer_attributes: [:email, :fname, :lname, :mobile_no, :birth_date] , address_attributes: [ :city, :district, :state, :country, :pincode] )                                
         else
               
           params['order'].merge!(:address_id => params['delivery_address'])

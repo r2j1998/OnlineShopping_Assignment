@@ -35,7 +35,7 @@
       <tr>
         <td><%= order.order_no %></td>
         <td><%= order.tracking_no %></td>
-        <td><%= order.customer.fname %> <%= order.customer.lname %></td>
+        <td><%= order.customer.fname.capitalize %> <%= order.customer.lname.capitalize %></td>
         <td><%= order.customer.email %></td>
         <td><%= order.delivery_date %></td>
         <td><%= order.order_value %></td>
