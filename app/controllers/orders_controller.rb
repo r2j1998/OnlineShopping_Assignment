@@ -39,7 +39,8 @@ class OrdersController < ApplicationController
   end
 
     def autocomplete_email    
-      availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").pluck(:email)   
+      #availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").pluck(:email)
+      availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").map(:email)   
       render json: availableCustomers  
     end
     def autocomplete_product
@@ -51,7 +52,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     
-    raise params.inspect
+    #raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|

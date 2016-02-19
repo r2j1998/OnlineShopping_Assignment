@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Assigmnent</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<head>
+  		<title>Assigmnent</title>
+  		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	    <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+	    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	    <%= csrf_meta_tags %>
+	</head>
+	<body>
 
-  
-</head>
-<body>
+		<div class="header">
+		    <%= render 'shared/navigation' %>
+		</div>
+		<br><br>
+		<div class="leftside">
+			<%#= render 'shared/side_navigation' %>
+		</div>
+		<div class="container">
+			<div class ="center">
 
-<div class="header">
-    <%= render 'shared/navigation' %>
-</div>
-<br><br>
-<div class="leftside">
-	<%#= render 'shared/side_navigation' %>
-	</div>
-<div class="container">
-	<div class ="center">
-
-	<% flash.each do |name, msg| %>
-		<script>
-  			swal("Good job!", "<%= msg %>", "success")
-  		</script>
-	<% end %>
+				<% flash.each do |name, msg| %>
+					<script>
+			  			swal("Good job!", "<%= msg %>", "success")
+			  		</script>
+				<% end %>
 	    
-		<%= yield %>
-
-		
-	</div>
-	<div class= "rightside">
-	</div>
-	</div>
-</body>
+				<%= yield %>	
+			</div>
+		</div>
+	</body>
 </html>
