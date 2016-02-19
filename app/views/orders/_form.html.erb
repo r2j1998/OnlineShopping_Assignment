@@ -21,11 +21,13 @@
       
       <script type="text/javascript">        
           $(document).ready(function(){ 
-
+            document.getElementById("getaddresses").disabled = true;
+            
             $(".showproduct").hide();
               
             $("#customeremail").on('keyup' , function(event){
 
+                document.getElementById("getaddresses").disabled = false;
                $("#customeremail").autocomplete({
                     source: "/orders/autocomplete_email"
                });
@@ -84,6 +86,8 @@
             });
 
               $("#new_customer_true").click(function(){
+                document.getElementById("getaddresses").disabled = true;
+                //document.getElementById("product_ids").value="";
 
                 $("#existing_customer_true").prop('checked', false);
                 document.getElementById("customeremail").value="";
@@ -109,6 +113,8 @@
                 $(".showaddress").hide();
               });
               $("#existing_customer_true").click(function(){
+
+                //document.getElementById("product_ids").value="";
                 document.getElementById('customer_block').style.display = "";
                 $("#new_customer_true").prop('checked', false);
                 document.getElementById("customeremail_new").value="";
@@ -135,7 +141,46 @@
               $(".customer_form").hide();
               document.getElementById("customeremail").readOnly = true;
               document.getElementById("customeremail_new").readOnly = true;
-            });             
+            });
+          function checkValidation()
+          {
+            var product_ids = document.getElementById("product_ids").value;
+
+            if (product_ids=='') {
+
+                 sweetAlert("Sorry...", "Please select products", "warning");
+                 return false;
+            }
+
+            var new_cust_email = document.getElementById("customeremail_new").value;
+            var new_cust_confirm_email = document.getElementById("order_customer_attributes_email").value;
+
+            if (document.getElementById("new_customer_true").checked == true) 
+            {
+                if (new_cust_email=='') 
+                {
+                  sweetAlert("Sorry...", "Enter new customer email id", "warning");
+                  return false;
+                }
+                else if (new_cust_email != new_cust_confirm_email) 
+                {
+                  sweetAlert("Sorry...", "Please check both email field", "warning");
+                  return false;
+                }
+            }
+            else if(document.getElementById("existing_customer_true").checked == true)
+            {
+              var cust_email = document.getElementById("customeremail").value;
+
+              if (cust_email=='') 
+              {
+                sweetAlert("Sorry...", "Please select existing customer and address", "warning");
+                return false;
+              }
+              
+            }
+          }
+
       </script>
             <div class="col-lg-6">
               <div class="input-group">
@@ -177,6 +222,8 @@
             <% end %>
           </div>
           <br><br><br>  
+
+         
 
           <div class="field form-group">
             <div class="col-sm-6">
@@ -236,16 +283,10 @@
         <br><br>
        <div class="actions form-group">
             <div class="col-sm-offset-3 col-sm-3">
-              <%= f.submit "Create Order"  ,class: "btn btn-primary btn-block btn-lg" %>
+              <%= f.submit "Create Order"  ,class: "btn btn-success btn-block btn-lg" , onclick: "return checkValidation()" %>
             </div>
           </div> 
-          <div class="actions form-group">
-            <div class="col-sm-offset-1 col-lg-2 col-lg-4">
-          <%= link_to root_path , :style=>'color:#FFFFFF;', class: "btn btn-danger" do%>
-              <i class="glyphicon glyphicon-remove-sign"></i>Cancel
-          <% end %>
-           </div>
-          </div> 
+          
     <% end %>
   </body>
 </html>

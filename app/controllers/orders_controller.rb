@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     
-    #raise params.inspect
+    raise params.inspect
     @order = Order.new(order_params)
 
     respond_to do |format|
@@ -62,8 +62,7 @@ class OrdersController < ApplicationController
           product_hash = params[:product_ids].split(',')
           product_hash.each do |product|
 
-              if product.to_s.empty?
-              else
+              if !product.to_s.empty?
                  @item_line = ItemLine.new(:order_id => @order.id , :product_id => product.to_i )
                  @item_line.save
               end
