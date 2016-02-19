@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   end
   def show_product
     
-      @product = Product.find_by_product_name(params[:product_name])
+      @product = Product.where(:product_name => params[:product_name]).first
       respond_to :js
   end
 
@@ -39,7 +39,6 @@ class OrdersController < ApplicationController
   end
 
     def autocomplete_email    
-      #availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").pluck(:email)
       availableCustomers = Customer.where('email LIKE ?' , "%#{params[:term]}%").map(:email)   
       render json: availableCustomers  
     end
